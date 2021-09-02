@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hacker One - Web Messaging</title>
+  </head>
+  <body>
+    <p><b>Purpose:</b> For testing Web Chat channel</p>
+    <p><b>Org ID:</b> 9daba2a6-60e8-42e5-a7ce-153973898b6a</p>
+    <p><b>Org Name:</b> Genesys Cloud HackerOne Digital Two</p>
+    <p><b>Org Short Name:</b>security-pentest-hackerone-ik8y3cxiomw</p>
+    <p><b>Contacts:</b> lucie.decristofaro@genesys.com</p>
+    <p><b>Documentation:</b> <a href="https://developer.test-genesys.cloud/developer-tools/#/webchat">Developer Tools</a> and <a href="https://developer.genesys.cloud/api/digital/webchat/agentchat">Web chat APIs</a></p>
+  </body>
+</html>
+
+
+<script src="https://apps.inintca.com/widgets/9.0/cxbus.min.js" onload="javascript:CXBus.configure({debug:false,pluginsPath:'https://apps.inintca.com/widgets/9.0/plugins/'}); CXBus.loadPlugin('widgets-core');"></script>
+
+<script>
+  window._genesys = {
+    "widgets": {
+      "webchat": {
+        "transport": {
+          "type": "purecloud-v2-sockets",
+          "dataURL": "https://api.inintca.com",
+          "deploymentKey": "388bee1a-1331-4ed0-a741-d7bb6fd1d801",
+          "orgGuid": "10f19be2-ba08-4701-a63f-e1668e7e5b7f",
+          "interactionData": {
+            "routing": {
+              "targetType": "QUEUE",
+              "targetAddress": "General Queue",
+              "priority": 2
+            }
+          }
+        },
+        "userData": {
+          "addressStreet": "",
+          "addressCity": "",
+          "addressPostalCode": "",
+          "addressState": "",
+          "phoneNumber": "",
+          "customField1Label": "",
+          "customField1": "",
+          "customField2Label": "",
+          "customField2": "",
+          "customField3Label": "",
+          "customField3": ""
+        }
+      }
+    }
+  };
+
+  function getAdvancedConfig() {
+    return {
+      "form": {
+        "autoSubmit": false,
+        "firstname": "",
+        "lastname": "",
+        "email": "",
+        "subject": ""
+      },
+      "formJSON": {
+        "wrapper": "<table></table>",
+        "inputs": [
+          {
+            "id": "cx_webchat_form_firstname",
+            "name": "firstname",
+            "maxlength": "100",
+            "placeholder": "Required",
+            "label": "First Name"
+          },
+          {
+            "id": "cx_webchat_form_lastname",
+            "name": "lastname",
+            "maxlength": "100",
+            "placeholder": "Required",
+            "label": "Last Name"
+          },
+          {
+            "id": "cx_webchat_form_email",
+            "name": "email",
+            "maxlength": "100",
+            "placeholder": "Optional",
+            "label": "Email"
+          },
+          {
+            "id": "cx_webchat_form_subject",
+            "name": "subject",
+            "maxlength": "100",
+            "placeholder": "Optional",
+            "label": "Subject"
+          }
+        ]
+      }
+    };
+  }
+
+  const customPlugin = CXBus.registerPlugin('Custom');
+</script>
+
+<button type="button" id="chat-button" onclick="customPlugin.command('WebChat.open', getAdvancedConfig());">Start Chat</button>
